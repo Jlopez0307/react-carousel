@@ -24,25 +24,51 @@ import Card from "./Card";
   function goForward() {
     setCurrCardIdx(currCardIdx + 1);
   }
+  
+  //Decrements currCardIdx state by 1
+  function goBackward() {
+    setCurrCardIdx(currCardIdx - 1);
+  }
+  
+  let leftButton;
+  let rightButton;
+
+  //Checks if the current card is the first card
+  if(currCardIdx === 0){
+    leftButton = null
+  } else if (currCardIdx >= 0){
+    leftButton = <i
+      className="bi bi-arrow-left-circle"
+      onClick={goBackward}
+    />
+  }
+
+  //Checks if the current card is the last card
+  if(currCardIdx ===  total - 1){
+    rightButton = null;
+  } else {
+    rightButton = <i
+      className="bi bi-arrow-right-circle"
+      onClick={goForward}
+    />
+  }
+  
+
+  console.log(currCardIdx)
+  console.log(total)
 
   return (
     <div className="Carousel">
       <h1>{title}</h1>
       <div className="Carousel-main">
-        <i
-          className="bi bi-arrow-left-circle"
-          onClick={goForward}
-        />
+        {leftButton}
         <Card
           caption={currCard.caption}
           src={currCard.src}
           currNum={currCardIdx + 1}
           totalNum={total}
         />
-        <i
-          className="bi bi-arrow-right-circle"
-          onClick={goForward}
-        />
+        {rightButton}
       </div>
     </div>
   );
